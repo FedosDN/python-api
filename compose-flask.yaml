@@ -12,7 +12,7 @@ services:
             - ./flaskapp:/app
         container_name: flask-server
         networks:
-            - starlette-network
+            - flask-network
 
     db:
         image: postgres:13.1-alpine
@@ -27,8 +27,20 @@ services:
             - ./storage/postgresql:/var/lib/postgresql/data
             - ./initdb:/docker-entrypoint-initdb.d
         networks:
-            - starlette-network
+            - flask-network
+
+    test:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile.test
+        depends_on:
+            - flask
+        volumes:
+            - ./testapp:/app
+        container_name: test-server
+        networks:
+            - flask-network
 
 networks:
-    starlette-network:
+    flask-network:
         driver: bridge
