@@ -1,8 +1,1 @@
-.idea/
-.vscode
-.env
-.flaskenv
-*.pyc
-*.pyo
-.cache/
 venv

@@ -7,3 +7,4 @@ flask-sqlacodegen~=1.1.8
 flask-marshmallow~=0.14.0
 marshmallow-sqlalchemy~=0.24.2
 flask_restful~=0.3.8
+flask-jwt-extended
