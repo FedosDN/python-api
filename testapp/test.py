@@ -19,14 +19,34 @@ class TestByJsonFiles(unittest.TestCase):
 
             for task in tasks:  
                 print(task['name'])
+                url = f'{BASE_SERVER}{task["request"]["url"]}'
                 if task["request"]["type"] == 'POST':
-                    url = f'{BASE_SERVER}{task["request"]["url"]}'
+                    
                     data = task["request"]["data"]
                     headers = task["request"]["header"]
                     r = requests.post(url,data=data,headers=headers)
+                    print(r.text)
                     resp = json.loads(r.text)
-                    print(task["response"])
+                    #print(task["response"])
                     for checking in task["response"]:
                         if checking["type"] == 'assertIn':
                             #print(checking)
+                            self.assertIn(checking["data"],resp)
+
+                        if checking["type"] == 'assertEqual':
+                            #print(checking)
                             self.assertEqual(checking["data"][0],checking["data"][1])
+
+                if task["request"]["type"] == 'GET':
+                    headers = task["request"]["header"]
+                    r = requests.get(url,headers=headers)
+                    resp = json.loads(r.text)
+                    print(resp)
+                    for checking in task["response"]:
+                        if checking["type"] == 'assertIn':
+                            #print(checking)
+                            self.assertIn(checking["data"],resp)
+
+                        if checking["type"] == 'assertEqual':
+                            #print(checking)
+                            self.assertEqual(resp[checking["data"][0]],checking["data"][1])

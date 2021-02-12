@@ -1,0 +1,8 @@
+Тестируем апликуху!
+Setting up
+Главная страница
+{'error': 'Not found'}
+Плохой токен
+{'message': 'a valid token is missing', 'status': 403}
+Нормальный токен
+{'message': 'hello', 'status': 0}

@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: docker/Dockerfile.flask
         ports:
-            - 5000:5000
+            - 8180:5000
         depends_on:
             - db
         volumes:
@@ -21,8 +21,8 @@ services:
             POSTGRES_USER: miya_db
             POSTGRES_PASSWORD: db
             #POSTGRES_DB: db
-        ports:
-            - 5432:5432
+        #ports:
+        #    - 5432:5432
         volumes:
             - ./storage/postgresql:/var/lib/postgresql/data
             - ./initdb:/docker-entrypoint-initdb.d

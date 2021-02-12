@@ -1,9 +1,9 @@
 [
     {
-        "name": "Создание заказа пассажиром",
+        "name": "Плохой токен",
         "request":  {
-            "type": "POST",
-            "url": "create/order",
+            "type": "GET",
+            "url": "order/create",
             "data": {
                 "title": "Нада тачка"
             },
@@ -13,9 +13,29 @@
         },
         "response": [
                 {
-                    "type": "assertIn",
-                    "data": ["message", "ok"]
+                    "type": "assertEqual",
+                    "data": ["status", 403]
                 }
             ]
+        },
+
+        {
+            "name": "Нормальный токен",
+            "request":  {
+                "type": "GET",
+                "url": "order/create",
+                "data": {
+                    "title": "Нада тачка"
+                },
+                "header": {
+                    "Authorization": "secreterweqrwerwerew"
+                }
+            },
+            "response": [
+                    {
+                        "type": "assertEqual",
+                        "data": ["status", 0]
+                    }
+                ]
         }
 ]

@@ -1,1 +1,6 @@
-docker exec -ti test-server bash -c 'python run.py'
+docker exec -ti test-server bash -c 'python run.py > tmp/test_result 2>tmp/test_errors'
+if [ $? = 0 ]; then
+    echo 'Ok'
+else
+    echo 'TEST Fail!!!!!!'
+fi

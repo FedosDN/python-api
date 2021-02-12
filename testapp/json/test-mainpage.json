@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Главная страница",
+        "request":  {
+            "type": "GET",
+            "url": "",
+            "header": {
+                "secret-token": "secret"
+            }
+        },
+        "response": [
+                {
+                    "type": "assertEqual",
+                    "data": ["error", "Not found"]
+                }
+            ]
+        }
+]
