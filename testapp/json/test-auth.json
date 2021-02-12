@@ -1,8 +1,7 @@
 [
     {
-      "name": "Создание заказа пассажиром",
-      "request":  {
-            
+        "name": "Создание заказа пассажиром",
+        "request":  {
             "type": "POST",
             "url": "create/order",
             "data": {
@@ -13,10 +12,10 @@
             }
         },
         "response": [
-            {
-                "type": "assertIn",
-                "data": ["message", "ok"]
-            }
-        ]
-    }
+                {
+                    "type": "assertIn",
+                    "data": ["message", "ok"]
+                }
+            ]
+        }
 ]

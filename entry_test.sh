@@ -4,6 +4,6 @@ python run.py
 while :
 do
 	sleep 10
-    python run.py
+    python -m unittest test
 done
 exec "$@"

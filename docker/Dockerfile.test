@@ -3,7 +3,7 @@ ENV PYTHONUNBUFFERED 1
 RUN apt update
 RUN mkdir /app
 WORKDIR /app
-COPY flaskapp/requirements.txt /app
+COPY testapp/requirements.txt /app
 RUN pip install -r requirements.txt
 RUN mkdir /entry
 COPY entry_test.sh /entry
