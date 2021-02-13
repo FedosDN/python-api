@@ -11,7 +11,7 @@
         "response": [
                 {
                     "type": "assertEqual",
-                    "data": ["error", "Not found"]
+                    "data": ["status", 0]
                 }
             ]
         }

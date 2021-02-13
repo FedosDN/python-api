@@ -1,5 +1,13 @@
-.
+E
+======================================================================
+ERROR: test_all_json (test.TestByJsonFiles)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/test.py", line 56, in test_all_json
+    self.assertEqual(resp[checking["data"][0]],checking["data"][1])
+KeyError: 'status'
+
 ----------------------------------------------------------------------
 Ran 1 test in 0.016s
 
-OK
+FAILED (errors=1)

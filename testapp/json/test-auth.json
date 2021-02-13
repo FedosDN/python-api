@@ -8,7 +8,7 @@
                 "title": "Нада тачка"
             },
             "header": {
-                "secret-token": "secret"
+                
             }
         },
         "response": [
@@ -28,7 +28,7 @@
                     "title": "Нада тачка"
                 },
                 "header": {
-                    "Authorization": "secreterweqrwerwerew"
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjBjYzU4MjVmZWUzMGNiMjgyYTA2M2UyNmZkZWE4ZDFlNjMwMmFmMzYwNGJhMzNkMzdmNmM1NzRiYTg0YTM2Y2YwZTQ2NzdjM2ZiZjBlZDkiLCJpYXQiOiIxNjEyODY0MTM0Ljk5MzIxMSIsIm5iZiI6IjE2MTI4NjQxMzQuOTkzMjE1IiwiZXhwIjoiMTY0NDQwMDEzNC45ODY1NDUiLCJzdWIiOiIxIiwic2NvcGVzIjpbIkRyaXZlclByb2ZpbGUiXX0.o7J3Djf3deigf9j3iVQTjpjat144nnZpU0SjjB4h25_2dX3F_UQItK2J5yIzinnw-e1AWwZV1a4iP7H_5vBHed2tW7ninLGOar9kMjVBOogGQzostEnVAdI8usT-NtdKiCAJ_0OGPTWSq8rBv0guuNDdvHZMk41vT9ol5n6YTt9eg2q1iMoTTIlx80HZQHBekGV8Om7qi6qYQYUPbRknrnL3PRQQSPRVOCv1D6aQ5bsdY_aGq6CtlT1loBeaVIanWlR2j5XKVT7cHGZ5jXxQKFDcwiV7Ob6NRstdmL9ff9wPQeJpFSCxAmrub1PKNh2r8KC4zxpxs6uIBGFmgpcd0QBQooPHRY6DrBLBkQEAlvZaIFduSguE8BtuTOEy0zWnrTjhgVFqQux8_NkLsbN4MvB1auBO3SV9cZMoL3dutIRjQLyq_-2xt3Vpvqa0f18LarcSbMwBnRDNapYUl0jD5t5gP_CqDiQu86NnplIsfR6VxyO-eaWBJnqixw9nGokWDu-KEGTqEhrqJ-BdoPXao8Mp-SnPMabvCO5RCga4_2Wf-hOF1ztYM5dHGd1LMq9PmjifyWhBRXxo_3OdT5058fsaPfxO2jF0xOp02aZHkLeBbr1JAf3fzbiESxYWN18cQ_fjHS_X3PtVnQ5Uy9w1sNBafwZ1QKq1by5y_ppAcAU"
                 }
             },
             "response": [

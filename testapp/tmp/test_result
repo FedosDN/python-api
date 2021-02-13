@@ -1,8 +1,8 @@
 Тестируем апликуху!
 Setting up
 Главная страница
-{'error': 'Not found'}
+<Response [200]>
 Плохой токен
-{'message': 'a valid token is missing', 'status': 403}
+<Response [200]>
 Нормальный токен
-{'message': 'hello', 'status': 0}
+<Response [422]>

@@ -7,6 +7,12 @@ import requests
 import unittest
 BASE_SERVER = 'http://flask:5000/'
 
+def check_status(resp):
+    print(resp)
+    if resp.status_code != 200:
+        with open('response_page.html', 'w') as f:
+            f.write(resp.text)
+
 class TestByJsonFiles(unittest.TestCase):
     def setUp(self):
         print('Setting up')
@@ -40,8 +46,9 @@ class TestByJsonFiles(unittest.TestCase):
                 if task["request"]["type"] == 'GET':
                     headers = task["request"]["header"]
                     r = requests.get(url,headers=headers)
+                    check_status(r)
                     resp = json.loads(r.text)
-                    print(resp)
+                    #print(resp)
                     for checking in task["response"]:
                         if checking["type"] == 'assertIn':
                             #print(checking)

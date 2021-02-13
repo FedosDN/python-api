@@ -6,6 +6,7 @@ services:
             dockerfile: docker/Dockerfile.flask
         ports:
             - 8180:5000
+        restart: always
         depends_on:
             - db
         volumes:

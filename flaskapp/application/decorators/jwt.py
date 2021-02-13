@@ -1,7 +1,9 @@
 from flask import request, jsonify
 from functools import wraps
 import jwt
-
+import os
+from app import app
+from ..profile.models import User
 
 def token_required(f):
     @wraps(f)
@@ -17,7 +19,20 @@ def token_required(f):
                 'message': 'a valid token is missing'
                 })
 
-        print(token)
+        #print(token)
+        
+
+        # keypath = os.path.join(app.instance_path, 'pub-key.txt')
+        
+        with open('pub-key.txt') as file:
+            key = file.read()
+        #print(key)
+        #print(token)
+        data = jwt.decode(token, key , algorithms=["RS256"])
+        print(data)
+        current_user = User.query.filter_by(id=int(data['sub'])).first()
+        print(current_user)
+        
         return f(*args, **kwargs)
 
         # try:
