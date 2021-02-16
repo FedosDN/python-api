@@ -2,8 +2,16 @@
   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <title>sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  password authentication failed for user &quot;db&quot;
+    <title>sqlalchemy.exc.OperationalError: (psycopg2.errors.AdminShutdown) terminating connection due to administrator command
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
 
+[SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.email_verified_at AS users_email_verified_at, users.password AS users_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 1, 'param_1': 1}]
 (Background on this error at: http://sqlalche.me/e/13/e3q8) // Werkzeug Debugger</title>
     <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css"
         type="text/css">
@@ -15,314 +23,68 @@
     <script src="?__debugger__=yes&amp;cmd=resource&amp;f=jquery.js"></script>
     <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
     <script type="text/javascript">
-      var TRACEBACK = 139718574956048,
+      var TRACEBACK = 139797112332048,
           CONSOLE_MODE = false,
           EVALEX = true,
           EVALEX_TRUSTED = false,
-          SECRET = "WTh2H01kKuBhAZyyG22D";
+          SECRET = "ECQmXYRKZ2naiT5zwKoK";
     </script>
   </head>
   <body style="background-color: #fff">
     <div class="debugger">
 <h1>sqlalchemy.exc.OperationalError</h1>
 <div class="detail">
-  <p class="errormsg">sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  password authentication failed for user &quot;db&quot;
+  <p class="errormsg">sqlalchemy.exc.OperationalError: (psycopg2.errors.AdminShutdown) terminating connection due to administrator command
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
 
+[SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.email_verified_at AS users_email_verified_at, users.password AS users_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 1, 'param_1': 1}]
 (Background on this error at: http://sqlalche.me/e/13/e3q8)</p>
 </div>
 <h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
 <div class="traceback">
   
-  <ul><li><div class="frame" id="frame-139718574986768">
+  <ul><li><div class="frame" id="frame-139797240763984">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
-      line <em class="line">2336</em>,
-      in <code class="function">_wrap_pool_connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>return self.run_callable(self.dialect.has_table, table_name, schema)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _wrap_pool_connect(self, fn, connection):</pre>
-<pre class="line before"><span class="ws">        </span>dialect = self.dialect</pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line current"><span class="ws">            </span>return fn()</pre>
-<pre class="line after"><span class="ws">        </span>except dialect.dbapi.Error as e:</pre>
-<pre class="line after"><span class="ws">            </span>if connection is None:</pre>
-<pre class="line after"><span class="ws">                </span>Connection._handle_dbapi_exception_noconnection(</pre>
-<pre class="line after"><span class="ws">                    </span>e, dialect, self</pre>
-<pre class="line after"><span class="ws">                </span>)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988688">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">364</em>,
-      in <code class="function">connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>``close()`` method is called, the connection will be returned to</pre>
-<pre class="line before"><span class="ws">        </span>the pool.</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws">        </span>if not self._use_threadlocal:</pre>
-<pre class="line current"><span class="ws">            </span>return _ConnectionFairy._checkout(self)</pre>
+      line <em class="line">1277</em>,
+      in <code class="function">_execute_context</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">                        </span>if fn(cursor, statement, parameters, context):</pre>
+<pre class="line before"><span class="ws">                            </span>evt_handled = True</pre>
+<pre class="line before"><span class="ws">                            </span>break</pre>
+<pre class="line before"><span class="ws">                </span>if not evt_handled:</pre>
+<pre class="line before"><span class="ws">                    </span>self.dialect.do_execute(</pre>
+<pre class="line current"><span class="ws">                        </span>cursor, statement, parameters, context</pre>
+<pre class="line after"><span class="ws">                    </span>)</pre>
 <pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">        </span>try:</pre>
-<pre class="line after"><span class="ws">            </span>rec = self._threadconns.current()</pre>
-<pre class="line after"><span class="ws">        </span>except AttributeError:</pre>
-<pre class="line after"><span class="ws">            </span>pass</pre></div>
+<pre class="line after"><span class="ws">            </span>if self._has_events or self.engine._has_events:</pre>
+<pre class="line after"><span class="ws">                </span>self.dispatch.after_cursor_execute(</pre>
+<pre class="line after"><span class="ws">                    </span>self,</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574988496">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">778</em>,
-      in <code class="function">_checkout</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">    </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>@classmethod</pre>
-<pre class="line before"><span class="ws">    </span>def _checkout(cls, pool, threadconns=None, fairy=None):</pre>
-<pre class="line before"><span class="ws">        </span>if not fairy:</pre>
-<pre class="line current"><span class="ws">            </span>fairy = _ConnectionRecord.checkout(pool)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>fairy._pool = pool</pre>
-<pre class="line after"><span class="ws">            </span>fairy._counter = 0</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>if threadconns is not None:</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574985296">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">495</em>,
-      in <code class="function">checkout</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws">        </span>return {}</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>@classmethod</pre>
-<pre class="line before"><span class="ws">    </span>def checkout(cls, pool):</pre>
-<pre class="line current"><span class="ws">        </span>rec = pool._do_get()</pre>
-<pre class="line after"><span class="ws">        </span>try:</pre>
-<pre class="line after"><span class="ws">            </span>dbapi_connection = rec.get_connection()</pre>
-<pre class="line after"><span class="ws">        </span>except Exception as err:</pre>
-<pre class="line after"><span class="ws">            </span>with util.safe_reraise():</pre>
-<pre class="line after"><span class="ws">                </span>rec._checkin_failed(err)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988816">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py"</cite>,
-      line <em class="line">140</em>,
-      in <code class="function">_do_get</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>if self._inc_overflow():</pre>
-<pre class="line before"><span class="ws">            </span>try:</pre>
-<pre class="line before"><span class="ws">                </span>return self._create_connection()</pre>
-<pre class="line before"><span class="ws">            </span>except:</pre>
-<pre class="line before"><span class="ws">                </span>with util.safe_reraise():</pre>
-<pre class="line current"><span class="ws">                    </span>self._dec_overflow()</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>return self._do_get()</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def _inc_overflow(self):</pre>
-<pre class="line after"><span class="ws">        </span>if self._max_overflow == -1:</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574989072">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py"</cite>,
-      line <em class="line">70</em>,
-      in <code class="function">__exit__</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>exc_type, exc_value, exc_tb = self._exc_info</pre>
-<pre class="line before"><span class="ws">            </span>self._exc_info = None  # remove potential circular references</pre>
-<pre class="line before"><span class="ws">            </span>if not self.warn_only:</pre>
-<pre class="line before"><span class="ws">                </span>compat.raise_(</pre>
-<pre class="line before"><span class="ws">                    </span>exc_value,</pre>
-<pre class="line current"><span class="ws">                    </span>with_traceback=exc_tb,</pre>
-<pre class="line after"><span class="ws">                </span>)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>if not compat.py3k and self._exc_info and self._exc_info[1]:</pre>
-<pre class="line after"><span class="ws">                </span># emulate Py3K's behavior of telling us when an exception</pre>
-<pre class="line after"><span class="ws">                </span># occurs in an exception handler.</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988752">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py"</cite>,
-      line <em class="line">182</em>,
-      in <code class="function">raise_</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span># intermediary exception does not change, but we can't figure</pre>
-<pre class="line before"><span class="ws">            </span># that out.</pre>
-<pre class="line before"><span class="ws">            </span>exception.__cause__ = replace_context</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line current"><span class="ws">            </span>raise exception</pre>
-<pre class="line after"><span class="ws">        </span>finally:</pre>
-<pre class="line after"><span class="ws">            </span># credit to</pre>
-<pre class="line after"><span class="ws">            </span># https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/</pre>
-<pre class="line after"><span class="ws">            </span># as the __traceback__ object creates a cycle</pre>
-<pre class="line after"><span class="ws">            </span>del exception, replace_context, from_, with_traceback</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988944">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py"</cite>,
-      line <em class="line">137</em>,
-      in <code class="function">_do_get</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">                    </span>code=&quot;3o7r&quot;,</pre>
-<pre class="line before"><span class="ws">                </span>)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>if self._inc_overflow():</pre>
-<pre class="line before"><span class="ws">            </span>try:</pre>
-<pre class="line current"><span class="ws">                </span>return self._create_connection()</pre>
-<pre class="line after"><span class="ws">            </span>except:</pre>
-<pre class="line after"><span class="ws">                </span>with util.safe_reraise():</pre>
-<pre class="line after"><span class="ws">                    </span>self._dec_overflow()</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>return self._do_get()</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574985680">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">309</em>,
-      in <code class="function">_create_connection</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>return _ConnectionFairy._checkout(self)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _create_connection(self):</pre>
-<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;Called by subclasses to create a new ConnectionRecord.&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line current"><span class="ws">        </span>return _ConnectionRecord(self)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def _invalidate(self, connection, exception=None, _checkin=True):</pre>
-<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Mark all connections established within the generation</pre>
-<pre class="line after"><span class="ws">        </span>of the given connection as invalidated.</pre>
-<pre class="line after"><span class="ws"></span> </pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988880">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">440</em>,
-      in <code class="function">__init__</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">    </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def __init__(self, pool, connect=True):</pre>
-<pre class="line before"><span class="ws">        </span>self.__pool = pool</pre>
-<pre class="line before"><span class="ws">        </span>if connect:</pre>
-<pre class="line current"><span class="ws">            </span>self.__connect(first_connect_check=True)</pre>
-<pre class="line after"><span class="ws">        </span>self.finalize_callback = deque()</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>fairy_ref = None</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>starttime = None</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574989200">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">661</em>,
-      in <code class="function">__connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>connection = pool._invoke_creator(self)</pre>
-<pre class="line before"><span class="ws">            </span>pool.logger.debug(&quot;Created new connection %r&quot;, connection)</pre>
-<pre class="line before"><span class="ws">            </span>self.connection = connection</pre>
-<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
-<pre class="line before"><span class="ws">            </span>with util.safe_reraise():</pre>
-<pre class="line current"><span class="ws">                </span>pool.logger.debug(&quot;Error on connect(): %s&quot;, e)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>if first_connect_check:</pre>
-<pre class="line after"><span class="ws">                </span>pool.dispatch.first_connect.for_modify(</pre>
-<pre class="line after"><span class="ws">                    </span>pool.dispatch</pre>
-<pre class="line after"><span class="ws">                </span>).exec_once_unless_exception(self.connection, self)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574986576">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py"</cite>,
-      line <em class="line">70</em>,
-      in <code class="function">__exit__</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>exc_type, exc_value, exc_tb = self._exc_info</pre>
-<pre class="line before"><span class="ws">            </span>self._exc_info = None  # remove potential circular references</pre>
-<pre class="line before"><span class="ws">            </span>if not self.warn_only:</pre>
-<pre class="line before"><span class="ws">                </span>compat.raise_(</pre>
-<pre class="line before"><span class="ws">                    </span>exc_value,</pre>
-<pre class="line current"><span class="ws">                    </span>with_traceback=exc_tb,</pre>
-<pre class="line after"><span class="ws">                </span>)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>if not compat.py3k and self._exc_info and self._exc_info[1]:</pre>
-<pre class="line after"><span class="ws">                </span># emulate Py3K's behavior of telling us when an exception</pre>
-<pre class="line after"><span class="ws">                </span># occurs in an exception handler.</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574989264">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py"</cite>,
-      line <em class="line">182</em>,
-      in <code class="function">raise_</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span># intermediary exception does not change, but we can't figure</pre>
-<pre class="line before"><span class="ws">            </span># that out.</pre>
-<pre class="line before"><span class="ws">            </span>exception.__cause__ = replace_context</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line current"><span class="ws">            </span>raise exception</pre>
-<pre class="line after"><span class="ws">        </span>finally:</pre>
-<pre class="line after"><span class="ws">            </span># credit to</pre>
-<pre class="line after"><span class="ws">            </span># https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/</pre>
-<pre class="line after"><span class="ws">            </span># as the __traceback__ object creates a cycle</pre>
-<pre class="line after"><span class="ws">            </span>del exception, replace_context, from_, with_traceback</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574986512">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">656</em>,
-      in <code class="function">__connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span># ensure any existing connection is removed, so that if</pre>
-<pre class="line before"><span class="ws">        </span># creator fails, this attribute stays None</pre>
-<pre class="line before"><span class="ws">        </span>self.connection = None</pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line before"><span class="ws">            </span>self.starttime = time.time()</pre>
-<pre class="line current"><span class="ws">            </span>connection = pool._invoke_creator(self)</pre>
-<pre class="line after"><span class="ws">            </span>pool.logger.debug(&quot;Created new connection %r&quot;, connection)</pre>
-<pre class="line after"><span class="ws">            </span>self.connection = connection</pre>
-<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
-<pre class="line after"><span class="ws">            </span>with util.safe_reraise():</pre>
-<pre class="line after"><span class="ws">                </span>pool.logger.debug(&quot;Error on connect(): %s&quot;, e)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574986640">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py"</cite>,
-      line <em class="line">114</em>,
-      in <code class="function">connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">                        </span>connection = fn(</pre>
-<pre class="line before"><span class="ws">                            </span>dialect, connection_record, cargs, cparams</pre>
-<pre class="line before"><span class="ws">                        </span>)</pre>
-<pre class="line before"><span class="ws">                        </span>if connection is not None:</pre>
-<pre class="line before"><span class="ws">                            </span>return connection</pre>
-<pre class="line current"><span class="ws">                </span>return dialect.connect(*cargs, **cparams)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>creator = pop_kwarg(&quot;creator&quot;, connect)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>poolclass = pop_kwarg(&quot;poolclass&quot;, None)</pre>
-<pre class="line after"><span class="ws">            </span>if poolclass is None:</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574989136">
+<li><div class="frame" id="frame-139797240764560">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py"</cite>,
-      line <em class="line">508</em>,
-      in <code class="function">connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">                </span>% (ident, self.max_identifier_length)</pre>
-<pre class="line before"><span class="ws">            </span>)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def connect(self, *cargs, **cparams):</pre>
-<pre class="line before"><span class="ws">        </span># inherits the docstring from interfaces.Dialect.connect</pre>
-<pre class="line current"><span class="ws">        </span>return self.dbapi.connect(*cargs, **cparams)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def create_connect_args(self, url):</pre>
-<pre class="line after"><span class="ws">        </span># inherits the docstring from interfaces.Dialect.create_connect_args</pre>
-<pre class="line after"><span class="ws">        </span>opts = url.translate_connect_args()</pre>
-<pre class="line after"><span class="ws">        </span>opts.update(url.query)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988624">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/psycopg2/__init__.py"</cite>,
-      line <em class="line">127</em>,
-      in <code class="function">connect</code></h4>
+      line <em class="line">608</em>,
+      in <code class="function">do_execute</code></h4>
   <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>if dsn is None and not kwargs:</pre>
-<pre class="line before"><span class="ws">        </span>raise TypeError('missing dsn and no parameters')</pre>
+<pre class="line before"><span class="ws">    </span>def do_executemany(self, cursor, statement, parameters, context=None):</pre>
+<pre class="line before"><span class="ws">        </span>cursor.executemany(statement, parameters)</pre>
 <pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>dsn = _ext.make_dsn(dsn, **kwargs)</pre>
-<pre class="line current"><span class="ws">    </span>conn = _connect(dsn, connection_factory=connection_factory, **kwasync)</pre>
-<pre class="line after"><span class="ws">    </span>if cursor_factory is not None:</pre>
-<pre class="line after"><span class="ws">        </span>conn.cursor_factory = cursor_factory</pre>
+<pre class="line before"><span class="ws">    </span>def do_execute(self, cursor, statement, parameters, context=None):</pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(statement, parameters)</pre>
 <pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>return conn</pre></div>
+<pre class="line after"><span class="ws">    </span>def do_execute_no_params(self, cursor, statement, context=None):</pre>
+<pre class="line after"><span class="ws">        </span>cursor.execute(statement)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def is_disconnect(self, e, connection, cursor):</pre></div>
 </div>
 
 <li><div class="exc-divider">The above exception was the direct cause of the following exception:</div>
-<li><div class="frame" id="frame-139718574985424">
+<li><div class="frame" id="frame-139797112329424">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">2464</em>,
       in <code class="function">__call__</code></h4>
@@ -337,7 +99,7 @@
 <pre class="line after"><span class="ws">        </span>return &quot;&lt;%s %r&gt;&quot; % (self.__class__.__name__, self.name)</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574985808">
+<li><div class="frame" id="frame-139797113606800">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">2450</em>,
       in <code class="function">wsgi_app</code></h4>
@@ -354,7 +116,7 @@
 <pre class="line after"><span class="ws">        </span>finally:</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574985360">
+<li><div class="frame" id="frame-139797112495376">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask_restful/__init__.py"</cite>,
       line <em class="line">272</em>,
       in <code class="function">error_router</code></h4>
@@ -371,7 +133,7 @@
 <pre class="line after"><span class="ws"></span> </pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574985936">
+<li><div class="frame" id="frame-139797112494736">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">1867</em>,
       in <code class="function">handle_exception</code></h4>
@@ -388,7 +150,7 @@
 <pre class="line after"><span class="ws">        </span>server_error = InternalServerError()</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986000">
+<li><div class="frame" id="frame-139797240771600">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/_compat.py"</cite>,
       line <em class="line">39</em>,
       in <code class="function">reraise</code></h4>
@@ -405,7 +167,7 @@
 <pre class="line after"><span class="ws">    </span>iterkeys = lambda d: d.iterkeys()</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986192">
+<li><div class="frame" id="frame-139797240771024">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">2447</em>,
       in <code class="function">wsgi_app</code></h4>
@@ -422,7 +184,7 @@
 <pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574985872">
+<li><div class="frame" id="frame-139797240770768">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">1952</em>,
       in <code class="function">full_dispatch_request</code></h4>
@@ -439,7 +201,7 @@
 <pre class="line after"><span class="ws">        </span>the request by converting it into a response and invoking the</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574985488">
+<li><div class="frame" id="frame-139797240771472">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask_restful/__init__.py"</cite>,
       line <em class="line">272</em>,
       in <code class="function">error_router</code></h4>
@@ -456,7 +218,7 @@
 <pre class="line after"><span class="ws"></span> </pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986320">
+<li><div class="frame" id="frame-139797112553936">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">1821</em>,
       in <code class="function">handle_user_exception</code></h4>
@@ -473,7 +235,7 @@
 <pre class="line after"><span class="ws">        </span>associated with it, or that was raised from an error handler.</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986064">
+<li><div class="frame" id="frame-139797240770896">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/_compat.py"</cite>,
       line <em class="line">39</em>,
       in <code class="function">reraise</code></h4>
@@ -490,7 +252,7 @@
 <pre class="line after"><span class="ws">    </span>iterkeys = lambda d: d.iterkeys()</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574985552">
+<li><div class="frame" id="frame-139797112554960">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">1950</em>,
       in <code class="function">full_dispatch_request</code></h4>
@@ -507,7 +269,7 @@
 <pre class="line after"><span class="ws">    </span>def finalize_request(self, rv, from_error_handler=False):</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986384">
+<li><div class="frame" id="frame-139797112554384">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/flask/app.py"</cite>,
       line <em class="line">1936</em>,
       in <code class="function">dispatch_request</code></h4>
@@ -524,7 +286,7 @@
 <pre class="line after"><span class="ws">        </span>error handling.</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986256">
+<li><div class="frame" id="frame-139797112553808">
   <h4>File <cite class="filename">"/app/application/decorators/jwt.py"</cite>,
       line <em class="line">33</em>,
       in <code class="function">decorator</code></h4>
@@ -541,7 +303,7 @@
 <pre class="line after"><span class="ws">        </span># try:</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574985744">
+<li><div class="frame" id="frame-139797112554512">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py"</cite>,
       line <em class="line">3429</em>,
       in <code class="function">first</code></h4>
@@ -558,7 +320,7 @@
 <pre class="line after"><span class="ws"></span> </pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986704">
+<li><div class="frame" id="frame-139797112556432">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py"</cite>,
       line <em class="line">3203</em>,
       in <code class="function">__getitem__</code></h4>
@@ -575,7 +337,7 @@
 <pre class="line after"><span class="ws">                </span>return list(self[item : item + 1])[0]</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986448">
+<li><div class="frame" id="frame-139797112557264">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py"</cite>,
       line <em class="line">3535</em>,
       in <code class="function">__iter__</code></h4>
@@ -592,466 +354,169 @@
 <pre class="line after"><span class="ws">            </span>bind = (</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986128">
+<li><div class="frame" id="frame-139797112556816">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py"</cite>,
-      line <em class="line">3557</em>,
+      line <em class="line">3560</em>,
       in <code class="function">_execute_and_instances</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>conn = conn.execution_options(**self._execution_options)</pre>
-<pre class="line before"><span class="ws">        </span>return conn</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _execute_and_instances(self, querycontext):</pre>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>def _execute_and_instances(self, querycontext):</pre>
 <pre class="line before"><span class="ws">        </span>conn = self._get_bind_args(</pre>
-<pre class="line current"><span class="ws">            </span>querycontext, self._connection_from_session, close_with_result=True</pre>
-<pre class="line after"><span class="ws">        </span>)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">        </span>result = conn.execute(querycontext.statement, self._params)</pre>
+<pre class="line before"><span class="ws">            </span>querycontext, self._connection_from_session, close_with_result=True</pre>
+<pre class="line before"><span class="ws">        </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>result = conn.execute(querycontext.statement, self._params)</pre>
 <pre class="line after"><span class="ws">        </span>return loading.instances(querycontext.query, result, querycontext)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _execute_crud(self, stmt, mapper):</pre>
+<pre class="line after"><span class="ws">        </span>conn = self._connection_from_session(</pre>
+<pre class="line after"><span class="ws">            </span>mapper=mapper, clause=stmt, close_with_result=True</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139797112554448">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
+      line <em class="line">1011</em>,
+      in <code class="function">execute</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>except AttributeError as err:</pre>
+<pre class="line before"><span class="ws">            </span>util.raise_(</pre>
+<pre class="line before"><span class="ws">                </span>exc.ObjectNotExecutableError(object_), replace_context=err</pre>
+<pre class="line before"><span class="ws">            </span>)</pre>
+<pre class="line before"><span class="ws">        </span>else:</pre>
+<pre class="line current"><span class="ws">            </span>return meth(self, multiparams, params)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _execute_function(self, func, multiparams, params):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Execute a sql.FunctionElement object.&quot;&quot;&quot;</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>return self._execute_clauseelement(func.select(), multiparams, params)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139797240766096">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/sql/elements.py"</cite>,
+      line <em class="line">298</em>,
+      in <code class="function">_execute_on_connection</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span># self</pre>
+<pre class="line before"><span class="ws">            </span>return self</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def _execute_on_connection(self, connection, multiparams, params):</pre>
+<pre class="line before"><span class="ws">        </span>if self.supports_execution:</pre>
+<pre class="line current"><span class="ws">            </span>return connection._execute_clauseelement(self, multiparams, params)</pre>
+<pre class="line after"><span class="ws">        </span>else:</pre>
+<pre class="line after"><span class="ws">            </span>raise exc.ObjectNotExecutableError(self)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def unique_params(self, *optionaldict, **kwargs):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Return a copy with :func:`_expression.bindparam` elements</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139797240765072">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
+      line <em class="line">1130</em>,
+      in <code class="function">_execute_clauseelement</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>dialect,</pre>
+<pre class="line before"><span class="ws">            </span>dialect.execution_ctx_cls._init_compiled,</pre>
+<pre class="line before"><span class="ws">            </span>compiled_sql,</pre>
+<pre class="line before"><span class="ws">            </span>distilled_params,</pre>
+<pre class="line before"><span class="ws">            </span>compiled_sql,</pre>
+<pre class="line current"><span class="ws">            </span>distilled_params,</pre>
+<pre class="line after"><span class="ws">        </span>)</pre>
+<pre class="line after"><span class="ws">        </span>if self._has_events or self.engine._has_events:</pre>
+<pre class="line after"><span class="ws">            </span>self.dispatch.after_execute(self, elem, multiparams, params, ret)</pre>
+<pre class="line after"><span class="ws">        </span>return ret</pre>
 <pre class="line after"><span class="ws"></span> </pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574986832">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py"</cite>,
-      line <em class="line">3572</em>,
-      in <code class="function">_get_bind_args</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>return conn.execute(stmt, self._params)</pre>
+<li><div class="frame" id="frame-139797240765456">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
+      line <em class="line">1317</em>,
+      in <code class="function">_execute_context</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">                    </span># rows to fetch.</pre>
+<pre class="line before"><span class="ws">                    </span>result._autoclose_connection = True</pre>
 <pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _get_bind_args(self, querycontext, fn, **kw):</pre>
-<pre class="line before"><span class="ws">        </span>return fn(</pre>
-<pre class="line current"><span class="ws">            </span>mapper=self._bind_mapper(), clause=querycontext.statement, **kw</pre>
-<pre class="line after"><span class="ws">        </span>)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>@property</pre>
-<pre class="line after"><span class="ws">    </span>def column_descriptions(self):</pre>
-<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Return metadata about the columns which would be</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574986896">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py"</cite>,
-      line <em class="line">3550</em>,
-      in <code class="function">_connection_from_session</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>except sa_exc.UnboundExecutionError:</pre>
-<pre class="line before"><span class="ws">            </span>bind = None</pre>
-<pre class="line before"><span class="ws">        </span>return str(context.statement.compile(bind))</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _connection_from_session(self, **kw):</pre>
-<pre class="line current"><span class="ws">        </span>conn = self.session.connection(**kw)</pre>
-<pre class="line after"><span class="ws">        </span>if self._execution_options:</pre>
-<pre class="line after"><span class="ws">            </span>conn = conn.execution_options(**self._execution_options)</pre>
-<pre class="line after"><span class="ws">        </span>return conn</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def _execute_and_instances(self, querycontext):</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574986960">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py"</cite>,
-      line <em class="line">1145</em>,
-      in <code class="function">connection</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>bind = self.get_bind(mapper, clause=clause, **kw)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>return self._connection_for_bind(</pre>
-<pre class="line before"><span class="ws">            </span>bind,</pre>
-<pre class="line before"><span class="ws">            </span>close_with_result=close_with_result,</pre>
-<pre class="line current"><span class="ws">            </span>execution_options=execution_options,</pre>
-<pre class="line after"><span class="ws">        </span>)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def _connection_for_bind(self, engine, execution_options=None, **kw):</pre>
-<pre class="line after"><span class="ws">        </span>if self.transaction is not None:</pre>
-<pre class="line after"><span class="ws">            </span>return self.transaction._connection_for_bind(</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987024">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py"</cite>,
-      line <em class="line">1151</em>,
-      in <code class="function">_connection_for_bind</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _connection_for_bind(self, engine, execution_options=None, **kw):</pre>
-<pre class="line before"><span class="ws">        </span>if self.transaction is not None:</pre>
-<pre class="line before"><span class="ws">            </span>return self.transaction._connection_for_bind(</pre>
-<pre class="line current"><span class="ws">                </span>engine, execution_options</pre>
+<pre class="line before"><span class="ws">        </span>except BaseException as e:</pre>
+<pre class="line before"><span class="ws">            </span>self._handle_dbapi_exception(</pre>
+<pre class="line current"><span class="ws">                </span>e, statement, parameters, cursor, context</pre>
 <pre class="line after"><span class="ws">            </span>)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>conn = engine._contextual_connect(**kw)</pre>
-<pre class="line after"><span class="ws">            </span>if execution_options:</pre>
-<pre class="line after"><span class="ws">                </span>conn = conn.execution_options(**execution_options)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987088">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py"</cite>,
-      line <em class="line">433</em>,
-      in <code class="function">_connection_for_bind</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">                    </span>raise sa_exc.InvalidRequestError(</pre>
-<pre class="line before"><span class="ws">                        </span>&quot;Session already has a Connection associated for the &quot;</pre>
-<pre class="line before"><span class="ws">                        </span>&quot;given Connection's Engine&quot;</pre>
-<pre class="line before"><span class="ws">                    </span>)</pre>
-<pre class="line before"><span class="ws">            </span>else:</pre>
-<pre class="line current"><span class="ws">                </span>conn = bind._contextual_connect()</pre>
-<pre class="line after"><span class="ws">                </span>local_connect = True</pre>
 <pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">        </span>try:</pre>
-<pre class="line after"><span class="ws">            </span>if execution_options:</pre>
-<pre class="line after"><span class="ws">                </span>conn = conn.execution_options(**execution_options)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987152">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
-      line <em class="line">2302</em>,
-      in <code class="function">_contextual_connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _contextual_connect(self, close_with_result=False, **kwargs):</pre>
-<pre class="line before"><span class="ws">        </span>return self._connection_cls(</pre>
-<pre class="line before"><span class="ws">            </span>self,</pre>
-<pre class="line current"><span class="ws">            </span>self._wrap_pool_connect(self.pool.connect, None),</pre>
-<pre class="line after"><span class="ws">            </span>close_with_result=close_with_result,</pre>
-<pre class="line after"><span class="ws">            </span>**kwargs</pre>
-<pre class="line after"><span class="ws">        </span>)</pre>
+<pre class="line after"><span class="ws">        </span>return result</pre>
 <pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def table_names(self, schema=None, connection=None):</pre></div>
+<pre class="line after"><span class="ws">    </span>def _cursor_execute(self, cursor, statement, parameters, context=None):</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574987216">
+<li><div class="frame" id="frame-139797240765264">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
-      line <em class="line">2340</em>,
-      in <code class="function">_wrap_pool_connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line before"><span class="ws">            </span>return fn()</pre>
-<pre class="line before"><span class="ws">        </span>except dialect.dbapi.Error as e:</pre>
-<pre class="line before"><span class="ws">            </span>if connection is None:</pre>
-<pre class="line before"><span class="ws">                </span>Connection._handle_dbapi_exception_noconnection(</pre>
-<pre class="line current"><span class="ws">                    </span>e, dialect, self</pre>
+      line <em class="line">1511</em>,
+      in <code class="function">_handle_dbapi_exception</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>if newraise:</pre>
+<pre class="line before"><span class="ws">                </span>util.raise_(newraise, with_traceback=exc_info[2], from_=e)</pre>
+<pre class="line before"><span class="ws">            </span>elif should_wrap:</pre>
+<pre class="line before"><span class="ws">                </span>util.raise_(</pre>
+<pre class="line current"><span class="ws">                    </span>sqlalchemy_exception, with_traceback=exc_info[2], from_=e</pre>
 <pre class="line after"><span class="ws">                </span>)</pre>
 <pre class="line after"><span class="ws">            </span>else:</pre>
-<pre class="line after"><span class="ws">                </span>util.raise_(</pre>
-<pre class="line after"><span class="ws">                    </span>sys.exc_info()[1], with_traceback=sys.exc_info()[2]</pre>
-<pre class="line after"><span class="ws">                </span>)</pre></div>
+<pre class="line after"><span class="ws">                </span>util.raise_(exc_info[1], with_traceback=exc_info[2])</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574987280">
+<li><div class="frame" id="frame-139797240765520">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py"</cite>,
+      line <em class="line">182</em>,
+      in <code class="function">raise_</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span># intermediary exception does not change, but we can't figure</pre>
+<pre class="line before"><span class="ws">            </span># that out.</pre>
+<pre class="line before"><span class="ws">            </span>exception.__cause__ = replace_context</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>raise exception</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre>
+<pre class="line after"><span class="ws">            </span># credit to</pre>
+<pre class="line after"><span class="ws">            </span># https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/</pre>
+<pre class="line after"><span class="ws">            </span># as the __traceback__ object creates a cycle</pre>
+<pre class="line after"><span class="ws">            </span>del exception, replace_context, from_, with_traceback</pre></div>
+</div>
+
+<li><div class="frame" id="frame-139797240764944">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
-      line <em class="line">1584</em>,
-      in <code class="function">_handle_dbapi_exception_noconnection</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>if newraise:</pre>
-<pre class="line before"><span class="ws">            </span>util.raise_(newraise, with_traceback=exc_info[2], from_=e)</pre>
-<pre class="line before"><span class="ws">        </span>elif should_wrap:</pre>
-<pre class="line before"><span class="ws">            </span>util.raise_(</pre>
-<pre class="line current"><span class="ws">                </span>sqlalchemy_exception, with_traceback=exc_info[2], from_=e</pre>
-<pre class="line after"><span class="ws">            </span>)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>util.raise_(exc_info[1], with_traceback=exc_info[2])</pre>
+      line <em class="line">1277</em>,
+      in <code class="function">_execute_context</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">                        </span>if fn(cursor, statement, parameters, context):</pre>
+<pre class="line before"><span class="ws">                            </span>evt_handled = True</pre>
+<pre class="line before"><span class="ws">                            </span>break</pre>
+<pre class="line before"><span class="ws">                </span>if not evt_handled:</pre>
+<pre class="line before"><span class="ws">                    </span>self.dialect.do_execute(</pre>
+<pre class="line current"><span class="ws">                        </span>cursor, statement, parameters, context</pre>
+<pre class="line after"><span class="ws">                    </span>)</pre>
 <pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def transaction(self, callable_, *args, **kwargs):</pre></div>
+<pre class="line after"><span class="ws">            </span>if self._has_events or self.engine._has_events:</pre>
+<pre class="line after"><span class="ws">                </span>self.dispatch.after_cursor_execute(</pre>
+<pre class="line after"><span class="ws">                    </span>self,</pre></div>
 </div>
 
-<li><div class="frame" id="frame-139718574987344">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py"</cite>,
-      line <em class="line">182</em>,
-      in <code class="function">raise_</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span># intermediary exception does not change, but we can't figure</pre>
-<pre class="line before"><span class="ws">            </span># that out.</pre>
-<pre class="line before"><span class="ws">            </span>exception.__cause__ = replace_context</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line current"><span class="ws">            </span>raise exception</pre>
-<pre class="line after"><span class="ws">        </span>finally:</pre>
-<pre class="line after"><span class="ws">            </span># credit to</pre>
-<pre class="line after"><span class="ws">            </span># https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/</pre>
-<pre class="line after"><span class="ws">            </span># as the __traceback__ object creates a cycle</pre>
-<pre class="line after"><span class="ws">            </span>del exception, replace_context, from_, with_traceback</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987408">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py"</cite>,
-      line <em class="line">2336</em>,
-      in <code class="function">_wrap_pool_connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>return self.run_callable(self.dialect.has_table, table_name, schema)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _wrap_pool_connect(self, fn, connection):</pre>
-<pre class="line before"><span class="ws">        </span>dialect = self.dialect</pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line current"><span class="ws">            </span>return fn()</pre>
-<pre class="line after"><span class="ws">        </span>except dialect.dbapi.Error as e:</pre>
-<pre class="line after"><span class="ws">            </span>if connection is None:</pre>
-<pre class="line after"><span class="ws">                </span>Connection._handle_dbapi_exception_noconnection(</pre>
-<pre class="line after"><span class="ws">                    </span>e, dialect, self</pre>
-<pre class="line after"><span class="ws">                </span>)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987472">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">364</em>,
-      in <code class="function">connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>``close()`` method is called, the connection will be returned to</pre>
-<pre class="line before"><span class="ws">        </span>the pool.</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws">        </span>if not self._use_threadlocal:</pre>
-<pre class="line current"><span class="ws">            </span>return _ConnectionFairy._checkout(self)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">        </span>try:</pre>
-<pre class="line after"><span class="ws">            </span>rec = self._threadconns.current()</pre>
-<pre class="line after"><span class="ws">        </span>except AttributeError:</pre>
-<pre class="line after"><span class="ws">            </span>pass</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987536">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">778</em>,
-      in <code class="function">_checkout</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">    </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>@classmethod</pre>
-<pre class="line before"><span class="ws">    </span>def _checkout(cls, pool, threadconns=None, fairy=None):</pre>
-<pre class="line before"><span class="ws">        </span>if not fairy:</pre>
-<pre class="line current"><span class="ws">            </span>fairy = _ConnectionRecord.checkout(pool)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>fairy._pool = pool</pre>
-<pre class="line after"><span class="ws">            </span>fairy._counter = 0</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>if threadconns is not None:</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987600">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">495</em>,
-      in <code class="function">checkout</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws">        </span>return {}</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>@classmethod</pre>
-<pre class="line before"><span class="ws">    </span>def checkout(cls, pool):</pre>
-<pre class="line current"><span class="ws">        </span>rec = pool._do_get()</pre>
-<pre class="line after"><span class="ws">        </span>try:</pre>
-<pre class="line after"><span class="ws">            </span>dbapi_connection = rec.get_connection()</pre>
-<pre class="line after"><span class="ws">        </span>except Exception as err:</pre>
-<pre class="line after"><span class="ws">            </span>with util.safe_reraise():</pre>
-<pre class="line after"><span class="ws">                </span>rec._checkin_failed(err)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987664">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py"</cite>,
-      line <em class="line">140</em>,
-      in <code class="function">_do_get</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>if self._inc_overflow():</pre>
-<pre class="line before"><span class="ws">            </span>try:</pre>
-<pre class="line before"><span class="ws">                </span>return self._create_connection()</pre>
-<pre class="line before"><span class="ws">            </span>except:</pre>
-<pre class="line before"><span class="ws">                </span>with util.safe_reraise():</pre>
-<pre class="line current"><span class="ws">                    </span>self._dec_overflow()</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>return self._do_get()</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def _inc_overflow(self):</pre>
-<pre class="line after"><span class="ws">        </span>if self._max_overflow == -1:</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987728">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py"</cite>,
-      line <em class="line">70</em>,
-      in <code class="function">__exit__</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>exc_type, exc_value, exc_tb = self._exc_info</pre>
-<pre class="line before"><span class="ws">            </span>self._exc_info = None  # remove potential circular references</pre>
-<pre class="line before"><span class="ws">            </span>if not self.warn_only:</pre>
-<pre class="line before"><span class="ws">                </span>compat.raise_(</pre>
-<pre class="line before"><span class="ws">                    </span>exc_value,</pre>
-<pre class="line current"><span class="ws">                    </span>with_traceback=exc_tb,</pre>
-<pre class="line after"><span class="ws">                </span>)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>if not compat.py3k and self._exc_info and self._exc_info[1]:</pre>
-<pre class="line after"><span class="ws">                </span># emulate Py3K's behavior of telling us when an exception</pre>
-<pre class="line after"><span class="ws">                </span># occurs in an exception handler.</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987792">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py"</cite>,
-      line <em class="line">182</em>,
-      in <code class="function">raise_</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span># intermediary exception does not change, but we can't figure</pre>
-<pre class="line before"><span class="ws">            </span># that out.</pre>
-<pre class="line before"><span class="ws">            </span>exception.__cause__ = replace_context</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line current"><span class="ws">            </span>raise exception</pre>
-<pre class="line after"><span class="ws">        </span>finally:</pre>
-<pre class="line after"><span class="ws">            </span># credit to</pre>
-<pre class="line after"><span class="ws">            </span># https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/</pre>
-<pre class="line after"><span class="ws">            </span># as the __traceback__ object creates a cycle</pre>
-<pre class="line after"><span class="ws">            </span>del exception, replace_context, from_, with_traceback</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987856">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py"</cite>,
-      line <em class="line">137</em>,
-      in <code class="function">_do_get</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">                    </span>code=&quot;3o7r&quot;,</pre>
-<pre class="line before"><span class="ws">                </span>)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>if self._inc_overflow():</pre>
-<pre class="line before"><span class="ws">            </span>try:</pre>
-<pre class="line current"><span class="ws">                </span>return self._create_connection()</pre>
-<pre class="line after"><span class="ws">            </span>except:</pre>
-<pre class="line after"><span class="ws">                </span>with util.safe_reraise():</pre>
-<pre class="line after"><span class="ws">                    </span>self._dec_overflow()</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>return self._do_get()</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987920">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">309</em>,
-      in <code class="function">_create_connection</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span>return _ConnectionFairy._checkout(self)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def _create_connection(self):</pre>
-<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;Called by subclasses to create a new ConnectionRecord.&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line current"><span class="ws">        </span>return _ConnectionRecord(self)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def _invalidate(self, connection, exception=None, _checkin=True):</pre>
-<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Mark all connections established within the generation</pre>
-<pre class="line after"><span class="ws">        </span>of the given connection as invalidated.</pre>
-<pre class="line after"><span class="ws"></span> </pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574987984">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">440</em>,
-      in <code class="function">__init__</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">    </span>&quot;&quot;&quot;</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def __init__(self, pool, connect=True):</pre>
-<pre class="line before"><span class="ws">        </span>self.__pool = pool</pre>
-<pre class="line before"><span class="ws">        </span>if connect:</pre>
-<pre class="line current"><span class="ws">            </span>self.__connect(first_connect_check=True)</pre>
-<pre class="line after"><span class="ws">        </span>self.finalize_callback = deque()</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>fairy_ref = None</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>starttime = None</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988048">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">661</em>,
-      in <code class="function">__connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>connection = pool._invoke_creator(self)</pre>
-<pre class="line before"><span class="ws">            </span>pool.logger.debug(&quot;Created new connection %r&quot;, connection)</pre>
-<pre class="line before"><span class="ws">            </span>self.connection = connection</pre>
-<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
-<pre class="line before"><span class="ws">            </span>with util.safe_reraise():</pre>
-<pre class="line current"><span class="ws">                </span>pool.logger.debug(&quot;Error on connect(): %s&quot;, e)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>if first_connect_check:</pre>
-<pre class="line after"><span class="ws">                </span>pool.dispatch.first_connect.for_modify(</pre>
-<pre class="line after"><span class="ws">                    </span>pool.dispatch</pre>
-<pre class="line after"><span class="ws">                </span>).exec_once_unless_exception(self.connection, self)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988112">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py"</cite>,
-      line <em class="line">70</em>,
-      in <code class="function">__exit__</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span>exc_type, exc_value, exc_tb = self._exc_info</pre>
-<pre class="line before"><span class="ws">            </span>self._exc_info = None  # remove potential circular references</pre>
-<pre class="line before"><span class="ws">            </span>if not self.warn_only:</pre>
-<pre class="line before"><span class="ws">                </span>compat.raise_(</pre>
-<pre class="line before"><span class="ws">                    </span>exc_value,</pre>
-<pre class="line current"><span class="ws">                    </span>with_traceback=exc_tb,</pre>
-<pre class="line after"><span class="ws">                </span>)</pre>
-<pre class="line after"><span class="ws">        </span>else:</pre>
-<pre class="line after"><span class="ws">            </span>if not compat.py3k and self._exc_info and self._exc_info[1]:</pre>
-<pre class="line after"><span class="ws">                </span># emulate Py3K's behavior of telling us when an exception</pre>
-<pre class="line after"><span class="ws">                </span># occurs in an exception handler.</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988176">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py"</cite>,
-      line <em class="line">182</em>,
-      in <code class="function">raise_</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">            </span># intermediary exception does not change, but we can't figure</pre>
-<pre class="line before"><span class="ws">            </span># that out.</pre>
-<pre class="line before"><span class="ws">            </span>exception.__cause__ = replace_context</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line current"><span class="ws">            </span>raise exception</pre>
-<pre class="line after"><span class="ws">        </span>finally:</pre>
-<pre class="line after"><span class="ws">            </span># credit to</pre>
-<pre class="line after"><span class="ws">            </span># https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/</pre>
-<pre class="line after"><span class="ws">            </span># as the __traceback__ object creates a cycle</pre>
-<pre class="line after"><span class="ws">            </span>del exception, replace_context, from_, with_traceback</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988240">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py"</cite>,
-      line <em class="line">656</em>,
-      in <code class="function">__connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">        </span># ensure any existing connection is removed, so that if</pre>
-<pre class="line before"><span class="ws">        </span># creator fails, this attribute stays None</pre>
-<pre class="line before"><span class="ws">        </span>self.connection = None</pre>
-<pre class="line before"><span class="ws">        </span>try:</pre>
-<pre class="line before"><span class="ws">            </span>self.starttime = time.time()</pre>
-<pre class="line current"><span class="ws">            </span>connection = pool._invoke_creator(self)</pre>
-<pre class="line after"><span class="ws">            </span>pool.logger.debug(&quot;Created new connection %r&quot;, connection)</pre>
-<pre class="line after"><span class="ws">            </span>self.connection = connection</pre>
-<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
-<pre class="line after"><span class="ws">            </span>with util.safe_reraise():</pre>
-<pre class="line after"><span class="ws">                </span>pool.logger.debug(&quot;Error on connect(): %s&quot;, e)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988304">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py"</cite>,
-      line <em class="line">114</em>,
-      in <code class="function">connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">                        </span>connection = fn(</pre>
-<pre class="line before"><span class="ws">                            </span>dialect, connection_record, cargs, cparams</pre>
-<pre class="line before"><span class="ws">                        </span>)</pre>
-<pre class="line before"><span class="ws">                        </span>if connection is not None:</pre>
-<pre class="line before"><span class="ws">                            </span>return connection</pre>
-<pre class="line current"><span class="ws">                </span>return dialect.connect(*cargs, **cparams)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>creator = pop_kwarg(&quot;creator&quot;, connect)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">            </span>poolclass = pop_kwarg(&quot;poolclass&quot;, None)</pre>
-<pre class="line after"><span class="ws">            </span>if poolclass is None:</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988368">
+<li><div class="frame" id="frame-139797240764368">
   <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py"</cite>,
-      line <em class="line">508</em>,
-      in <code class="function">connect</code></h4>
-  <div class="source library"><pre class="line before"><span class="ws">                </span>% (ident, self.max_identifier_length)</pre>
-<pre class="line before"><span class="ws">            </span>)</pre>
-<pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>def connect(self, *cargs, **cparams):</pre>
-<pre class="line before"><span class="ws">        </span># inherits the docstring from interfaces.Dialect.connect</pre>
-<pre class="line current"><span class="ws">        </span>return self.dbapi.connect(*cargs, **cparams)</pre>
-<pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>def create_connect_args(self, url):</pre>
-<pre class="line after"><span class="ws">        </span># inherits the docstring from interfaces.Dialect.create_connect_args</pre>
-<pre class="line after"><span class="ws">        </span>opts = url.translate_connect_args()</pre>
-<pre class="line after"><span class="ws">        </span>opts.update(url.query)</pre></div>
-</div>
-
-<li><div class="frame" id="frame-139718574988432">
-  <h4>File <cite class="filename">"/usr/local/lib/python3.7/site-packages/psycopg2/__init__.py"</cite>,
-      line <em class="line">127</em>,
-      in <code class="function">connect</code></h4>
+      line <em class="line">608</em>,
+      in <code class="function">do_execute</code></h4>
   <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>if dsn is None and not kwargs:</pre>
-<pre class="line before"><span class="ws">        </span>raise TypeError('missing dsn and no parameters')</pre>
+<pre class="line before"><span class="ws">    </span>def do_executemany(self, cursor, statement, parameters, context=None):</pre>
+<pre class="line before"><span class="ws">        </span>cursor.executemany(statement, parameters)</pre>
 <pre class="line before"><span class="ws"></span> </pre>
-<pre class="line before"><span class="ws">    </span>dsn = _ext.make_dsn(dsn, **kwargs)</pre>
-<pre class="line current"><span class="ws">    </span>conn = _connect(dsn, connection_factory=connection_factory, **kwasync)</pre>
-<pre class="line after"><span class="ws">    </span>if cursor_factory is not None:</pre>
-<pre class="line after"><span class="ws">        </span>conn.cursor_factory = cursor_factory</pre>
+<pre class="line before"><span class="ws">    </span>def do_execute(self, cursor, statement, parameters, context=None):</pre>
+<pre class="line current"><span class="ws">        </span>cursor.execute(statement, parameters)</pre>
 <pre class="line after"><span class="ws"></span> </pre>
-<pre class="line after"><span class="ws">    </span>return conn</pre></div>
+<pre class="line after"><span class="ws">    </span>def do_execute_no_params(self, cursor, statement, context=None):</pre>
+<pre class="line after"><span class="ws">        </span>cursor.execute(statement)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def is_disconnect(self, e, connection, cursor):</pre></div>
 </div>
 </ul>
-  <blockquote>sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  password authentication failed for user &quot;db&quot;
+  <blockquote>sqlalchemy.exc.OperationalError: (psycopg2.errors.AdminShutdown) terminating connection due to administrator command
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
 
+[SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.email_verified_at AS users_email_verified_at, users.password AS users_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 1, 'param_1': 1}]
 (Background on this error at: http://sqlalche.me/e/13/e3q8)</blockquote>
 </div>
 
@@ -1065,41 +530,14 @@
       <input type="submit" value="create paste"></span>
     </p>
     <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 2336, in _wrap_pool_connect
-    return fn()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 364, in connect
-    return _ConnectionFairy._checkout(self)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 778, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 495, in checkout
-    rec = pool._do_get()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py&quot;, line 140, in _do_get
-    self._dec_overflow()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py&quot;, line 70, in __exit__
-    with_traceback=exc_tb,
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py&quot;, line 182, in raise_
-    raise exception
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py&quot;, line 137, in _do_get
-    return self._create_connection()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 309, in _create_connection
-    return _ConnectionRecord(self)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 440, in __init__
-    self.__connect(first_connect_check=True)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 661, in __connect
-    pool.logger.debug(&quot;Error on connect(): %s&quot;, e)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py&quot;, line 70, in __exit__
-    with_traceback=exc_tb,
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py&quot;, line 182, in raise_
-    raise exception
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 656, in __connect
-    connection = pool._invoke_creator(self)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py&quot;, line 114, in connect
-    return dialect.connect(*cargs, **cparams)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py&quot;, line 508, in connect
-    return self.dbapi.connect(*cargs, **cparams)
-  File &quot;/usr/local/lib/python3.7/site-packages/psycopg2/__init__.py&quot;, line 127, in connect
-    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
-psycopg2.OperationalError: FATAL:  password authentication failed for user &quot;db&quot;
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 1277, in _execute_context
+    cursor, statement, parameters, context
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py&quot;, line 608, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.AdminShutdown: terminating connection due to administrator command
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
 
 The above exception was the direct cause of the following exception:
 
@@ -1136,62 +574,34 @@ Traceback (most recent call last):
     return list(res)
   File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py&quot;, line 3535, in __iter__
     return self._execute_and_instances(context)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py&quot;, line 3557, in _execute_and_instances
-    querycontext, self._connection_from_session, close_with_result=True
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py&quot;, line 3572, in _get_bind_args
-    mapper=self._bind_mapper(), clause=querycontext.statement, **kw
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py&quot;, line 3550, in _connection_from_session
-    conn = self.session.connection(**kw)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py&quot;, line 1145, in connection
-    execution_options=execution_options,
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py&quot;, line 1151, in _connection_for_bind
-    engine, execution_options
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py&quot;, line 433, in _connection_for_bind
-    conn = bind._contextual_connect()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 2302, in _contextual_connect
-    self._wrap_pool_connect(self.pool.connect, None),
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 2340, in _wrap_pool_connect
-    e, dialect, self
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 1584, in _handle_dbapi_exception_noconnection
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py&quot;, line 3560, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 1011, in execute
+    return meth(self, multiparams, params)
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/sql/elements.py&quot;, line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 1130, in _execute_clauseelement
+    distilled_params,
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 1317, in _execute_context
+    e, statement, parameters, cursor, context
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 1511, in _handle_dbapi_exception
     sqlalchemy_exception, with_traceback=exc_info[2], from_=e
   File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py&quot;, line 182, in raise_
     raise exception
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 2336, in _wrap_pool_connect
-    return fn()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 364, in connect
-    return _ConnectionFairy._checkout(self)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 778, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 495, in checkout
-    rec = pool._do_get()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py&quot;, line 140, in _do_get
-    self._dec_overflow()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py&quot;, line 70, in __exit__
-    with_traceback=exc_tb,
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py&quot;, line 182, in raise_
-    raise exception
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py&quot;, line 137, in _do_get
-    return self._create_connection()
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 309, in _create_connection
-    return _ConnectionRecord(self)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 440, in __init__
-    self.__connect(first_connect_check=True)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 661, in __connect
-    pool.logger.debug(&quot;Error on connect(): %s&quot;, e)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py&quot;, line 70, in __exit__
-    with_traceback=exc_tb,
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py&quot;, line 182, in raise_
-    raise exception
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py&quot;, line 656, in __connect
-    connection = pool._invoke_creator(self)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py&quot;, line 114, in connect
-    return dialect.connect(*cargs, **cparams)
-  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py&quot;, line 508, in connect
-    return self.dbapi.connect(*cargs, **cparams)
-  File &quot;/usr/local/lib/python3.7/site-packages/psycopg2/__init__.py&quot;, line 127, in connect
-    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  password authentication failed for user &quot;db&quot;
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py&quot;, line 1277, in _execute_context
+    cursor, statement, parameters, context
+  File &quot;/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py&quot;, line 608, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.errors.AdminShutdown) terminating connection due to administrator command
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
 
+[SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.email_verified_at AS users_email_verified_at, users.password AS users_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 1, 'param_1': 1}]
 (Background on this error at: http://sqlalche.me/e/13/e3q8)</textarea>
   </form>
 </div>
@@ -1228,41 +638,14 @@ sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  password au
 <!--
 
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2336, in _wrap_pool_connect
-    return fn()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
-    return _ConnectionFairy._checkout(self)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
-    rec = pool._do_get()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
-    self._dec_overflow()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    with_traceback=exc_tb,
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
-    raise exception
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
-    return self._create_connection()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
-    return _ConnectionRecord(self)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
-    self.__connect(first_connect_check=True)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
-    pool.logger.debug("Error on connect(): %s", e)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    with_traceback=exc_tb,
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
-    raise exception
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
-    connection = pool._invoke_creator(self)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
-    return dialect.connect(*cargs, **cparams)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 508, in connect
-    return self.dbapi.connect(*cargs, **cparams)
-  File "/usr/local/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
-    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
-psycopg2.OperationalError: FATAL:  password authentication failed for user "db"
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1277, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.AdminShutdown: terminating connection due to administrator command
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
 
 The above exception was the direct cause of the following exception:
 
@@ -1299,62 +682,34 @@ Traceback (most recent call last):
     return list(res)
   File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3535, in __iter__
     return self._execute_and_instances(context)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3557, in _execute_and_instances
-    querycontext, self._connection_from_session, close_with_result=True
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3572, in _get_bind_args
-    mapper=self._bind_mapper(), clause=querycontext.statement, **kw
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3550, in _connection_from_session
-    conn = self.session.connection(**kw)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1145, in connection
-    execution_options=execution_options,
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1151, in _connection_for_bind
-    engine, execution_options
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 433, in _connection_for_bind
-    conn = bind._contextual_connect()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2302, in _contextual_connect
-    self._wrap_pool_connect(self.pool.connect, None),
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2340, in _wrap_pool_connect
-    e, dialect, self
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1584, in _handle_dbapi_exception_noconnection
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3560, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1130, in _execute_clauseelement
+    distilled_params,
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1317, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1511, in _handle_dbapi_exception
     sqlalchemy_exception, with_traceback=exc_info[2], from_=e
   File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
     raise exception
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 2336, in _wrap_pool_connect
-    return fn()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 364, in connect
-    return _ConnectionFairy._checkout(self)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 778, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 495, in checkout
-    rec = pool._do_get()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 140, in _do_get
-    self._dec_overflow()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    with_traceback=exc_tb,
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
-    raise exception
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/impl.py", line 137, in _do_get
-    return self._create_connection()
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 309, in _create_connection
-    return _ConnectionRecord(self)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 440, in __init__
-    self.__connect(first_connect_check=True)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
-    pool.logger.debug("Error on connect(): %s", e)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    with_traceback=exc_tb,
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
-    raise exception
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/pool/base.py", line 656, in __connect
-    connection = pool._invoke_creator(self)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/strategies.py", line 114, in connect
-    return dialect.connect(*cargs, **cparams)
-  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 508, in connect
-    return self.dbapi.connect(*cargs, **cparams)
-  File "/usr/local/lib/python3.7/site-packages/psycopg2/__init__.py", line 127, in connect
-    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  password authentication failed for user "db"
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1277, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.errors.AdminShutdown) terminating connection due to administrator command
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
 
+[SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.email_verified_at AS users_email_verified_at, users.password AS users_password, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 1, 'param_1': 1}]
 (Background on this error at: http://sqlalche.me/e/13/e3q8)
 
 -->

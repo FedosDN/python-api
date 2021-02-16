@@ -1,0 +1,21 @@
+[
+    {
+        "name": "Создание профиля водителя",
+        "request":  {
+            "type": "POST",
+            "url": "driver",
+            "data": {
+                "name": "test-driver"
+            },
+            "header": {
+                
+            }
+        },
+        "response": [
+                {
+                    "type": "assertEqual",
+                    "data": ["status", 0]
+                }
+            ]
+        }
+]

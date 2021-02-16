@@ -39,6 +39,8 @@ jwt = create_jwt(app)
 
 api = create_api(app)
 
+from application.profile.views import CreateUpdateDriver
+api.add_resource(CreateUpdateDriver,'/driver')
 
 @jwt.token_in_blacklist_loader
 def check_jwt(decrypted_token):
